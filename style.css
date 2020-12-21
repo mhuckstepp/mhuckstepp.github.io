@@ -1,16 +1,40 @@
+#top{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
 #name {
-    color:lightgray;
+   color:rgba(23, 27, 26, 0.603);
 }
 
 img {
-    display: inline-flex;
-    margin-left: 0;
-    margin-right: auto;
-    height: 10%;
-    width: 10%;
-  }
+    position: absolute;
+    top:5px;
+    left: 5px;
+ }
+
+#nav {
+ display: flex;
+ justify-content: flex-start;
+ font-size: 1.2em;
+}
+
+#open {
+ display: flex;
+ justify-content: center;
+ text-align: center;
+ font-size: 1.5em;
+}
+
+#hello {
+    text-align: center;
+}
 
 
-
-
+#container{
+    width:450px;
+    margin: auto;
+    border-left: 2px solid darkgray;
+}
 
