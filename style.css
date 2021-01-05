@@ -4,6 +4,15 @@
     flex-direction: column;
 }
 
+ul {
+    font-size: 1.3em;
+    list-style-type: none;
+   }
+
+li:hover {
+    background-color: lightgray;
+}
+   
 #top{
     display: flex;
     justify-content: space-between;
@@ -26,9 +35,6 @@
 }
 
 
-#nav {
- font-size: 1.2em;
-}
 
 
 #open {
