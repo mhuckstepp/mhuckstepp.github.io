@@ -134,6 +134,7 @@ html * {
 
 html {
   font-size: 62.5%;
+  height: 100%;
 }
 
 body {
@@ -142,7 +143,13 @@ body {
   background-color: #fffafa;
   font-family: "Roboto", sans-serif;
   color: #696969;
-  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1 0 auto;
 }
 
 h1 {
@@ -155,17 +162,24 @@ h3 {
   letter-spacing: 3%;
 }
 
-.mainLinks h3 {
+.mainLinksCont h3 {
   font-size: 2.5rem;
   letter-spacing: 1%;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 }
 
-.mainLinks h4 {
+.mainLinksCont h4 {
   font-size: 2rem;
   letter-spacing: 1px;
-  margin: 3% 0 0;
+  margin: 2% 0 0.5%;
   text-decoration: underline;
+}
+
+.mainLinksCont {
+  margin: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 #plainwr h3 {
@@ -191,13 +205,6 @@ header nav {
   margin: 1% 0 2% 5%;
 }
 
-header button {
-  height: 100%;
-  width: 25%;
-  border-radius: 4px;
-  transition: 0.5s;
-}
-
 header nav span {
   border-right: 2px solid black;
 }
@@ -212,13 +219,14 @@ header a {
   transition: 0.5s;
 }
 
+/* Hover on header nav links */
+header a:hover {
+  font-weight: 900;
+}
+
 /* show current page button as darker */
 #current {
   font-weight: bold;
-}
-
-header a:hover {
-  font-weight: 900;
 }
 
 hr {
@@ -233,26 +241,22 @@ hr {
   max-width: 1600px;
   margin: auto;
   flex-grow: 1;
-  min-height: 80vh;
+  min-height: 70vh;
+  position: relative;
 }
 
 .mainH {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  overflow: auto;
 }
 
 .mainP {
-  width: 25%;
+  width: 30%;
   margin: 1%;
-}
-
-.mainIm {
-  width: 100%;
-  max-width: 500px;
-  min-width: 250px;
-  height: auto;
 }
 
 .mainText {
@@ -275,17 +279,9 @@ hr {
   margin-bottom: 5px;
 }
 
-.gallery {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-self: center;
-  align-content: center;
-}
-
 footer {
-  bottom: 0;
-  align-self: flex-end;
+  position: static;
+  bottom: 0px;
   width: 100%;
   height: auto;
   background-color: #beb8b89c;
@@ -400,7 +396,6 @@ footer img {
   header {
     justify-content: space-evenly;
     align-items: center;
-    background-color: #beb8b89c;
   }
 
   h1 {
@@ -479,7 +474,7 @@ footer img {
     display: none;
   }
 
-  .mainLinks {
+  .mainLinksCont {
     margin: 5%;
   }
 }
