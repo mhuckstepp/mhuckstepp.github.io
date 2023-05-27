@@ -7,8 +7,8 @@ export default function Footer() {
       <Link href="/" asChild>
         <Button title="Home" />
       </Link>
-      <Link href="/race" asChild>
-        <Button title="Race" />
+      <Link href="/timePredictor" asChild>
+        <Button title="Time Predictor" />
       </Link>
     </View>
   );

@@ -4,7 +4,7 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "race-time-calc",
-    "slug": "race-time-calc"
+    "name": "run-time-calc",
+    "slug": "run-time-calc"
   }
 }

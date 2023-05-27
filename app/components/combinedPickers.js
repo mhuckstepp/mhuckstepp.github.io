@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
-import { Picker, Text } from '.';
+import Picker from './picker';
+import Text from './text';
 import {
   handleTimeInput,
   convertPaceToSpeedString,

@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 
-import { Text } from '.';
+import Text from './text';
 import { convertSpeedToPace, hoursToFormattedTime } from '../utils';
 
 export default function TimeTableRow(props) {
@@ -20,13 +20,13 @@ export default function TimeTableRow(props) {
 
 export const TimeTableHeader = () => (
   <View style={styles.container}>
-    <Text style={styles.textContainer} textStyle={styles.textStyle} size={24}>
+    <Text style={styles.textContainer} size={22}>
       Speed
     </Text>
-    <Text style={styles.textContainer} textStyle={styles.textStyle} size={24}>
+    <Text style={styles.textContainer} size={22}>
       Pace
     </Text>
-    <Text style={styles.textContainer} textStyle={styles.textStyle} size={24}>
+    <Text style={styles.textContainer} size={22}>
       Finish Time
     </Text>
   </View>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textContainer: {
-    width: '100%',
+    flex: 1,
   },
   textStyle: {
     textAlign: 'center',
