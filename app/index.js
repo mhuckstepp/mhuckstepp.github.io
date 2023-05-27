@@ -9,8 +9,12 @@ import {
   Button,
   Text,
 } from './components';
-import Footer from './components/footer';
-import { createSpeeds } from './utils';
+// import Footer from './components/footer';
+import {
+  createSpeeds,
+  getPaceValuesFromSpeed,
+  getSpeedValuesFromPace,
+} from './utils';
 
 const raceDistances = [
   [1, '1 Mile'],
@@ -26,10 +30,10 @@ const raceDistances = [
 
 export default function App() {
   const [switchValue, setSwitchValue] = useState(false);
-  const [minute, onChangeMinute] = useState(7);
-  const [second, onChangeSecond] = useState(30);
-  const [main, onChangeSpeed] = useState(7);
-  const [decimal, onChangeSpeedDecimal] = useState(5);
+  const [minute, setMinute] = useState(7);
+  const [second, setSecond] = useState(30);
+  const [mainSpeed, setMainSpeed] = useState(7);
+  const [decimalSpeed, setDecimalSpeed] = useState(5);
   const [distance, setDistance] = useState(null);
   const [speedList, setSpeedList] = useState([]);
 
@@ -37,38 +41,63 @@ export default function App() {
     setSpeedList(createSpeeds(minute, second));
   }, [minute, second]);
 
+  useEffect(() => {
+    if (!switchValue) return;
+    const [newMin, newSec] = getPaceValuesFromSpeed(mainSpeed, decimalSpeed);
+    setMinute(newMin);
+    setSecond(newSec);
+  }, [mainSpeed, decimalSpeed]);
+
+  // useEffect(() => {
+  //   if (switchValue) return;
+  //   const [newMainSpeed, newDecimalSpeed] = getSpeedValuesFromPace(
+  //     minute,
+  //     second,
+  //   );
+  //   setMainSpeed(newMainSpeed);
+  //   setDecimalSpeed(newDecimalSpeed);
+  // }, [minute, second]);
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.bodyContainer}>
         <Switch value={switchValue} onValueChange={setSwitchValue} />
         {switchValue ? (
           <>
-            <Text size={28}>Pace to Speed Converter</Text>
+            <Text size={28}>Speed to Pace Converter</Text>
             <CombinedPickers
-              mainVal={minute}
-              secondaryVal={second}
-              onChangeMain={onChangeMinute}
-              onChangeSecondary={onChangeSecond}
+              mainVal={mainSpeed}
+              secondaryVal={decimalSpeed}
+              onChangeMain={setMainSpeed}
+              onChangeSecondary={setDecimalSpeed}
             />
           </>
         ) : (
           <>
-            <Text size={28}>Speed to Pace Converter</Text>
+            <Text size={28}>Pace to Speed Converter</Text>
             <CombinedPickers
-              mainVal={main}
-              secondaryVal={decimal}
-              onChangeMain={onChangeSpeed}
-              onChangeSecondary={onChangeSpeedDecimal}
+              mainVal={minute}
+              secondaryVal={second}
+              onChangeMain={setMinute}
+              onChangeSecondary={setSecond}
               usePace
             />
           </>
         )}
         {distance ? (
           <>
-            <Text>Race: {distance} miles</Text>
+            <Text>
+              Race:
+              {
+                raceDistances.find(
+                  (distanceObj) => distanceObj[0] == distance,
+                )?.[1]
+              }
+            </Text>
             <Button onPress={() => setDistance(null)} title="clear distance" />
             <FlatList
               data={speedList}
+              style={styles.speedListContainer}
               ListHeaderComponent={<TimeTableHeader />}
               renderItem={({ item }) => (
                 <TimeTableRow speed={item} distance={distance} />
@@ -78,7 +107,10 @@ export default function App() {
           </>
         ) : (
           <>
-            <Text>Check time for specific distances</Text>
+            <Text size={18}>
+              Check your total race time based on your current speed for one of
+              the following distances
+            </Text>
             <View style={styles.raceButtonContainer}>
               {raceDistances.map(([distance, label]) => (
                 <Button
@@ -91,7 +123,7 @@ export default function App() {
           </>
         )}
       </View>
-      <Footer />
+      {/* <Footer /> */}
     </SafeAreaView>
   );
 }
@@ -114,10 +146,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    width: '75%',
+    width: '100%',
+    maxWidth: 500,
   },
   raceButton: {
-    width: '20%',
+    width: '30%',
     margin: 10,
+    maxWidth: 250,
+  },
+  speedListContainer: {
+    width: '100%',
+    maxWidth: 500,
   },
 });

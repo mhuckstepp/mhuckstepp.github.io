@@ -16,9 +16,9 @@ export default function TimeTableRow(props) {
 
 export const TimeTableHeader = () => (
   <View style={styles.container}>
-    <Text> Speed </Text>
-    <Text> Pace </Text>
-    <Text> Total Time</Text>
+    <Text size={28}> Speed </Text>
+    <Text size={28}> Pace </Text>
+    <Text size={28}> Finish Time</Text>
   </View>
 );
 

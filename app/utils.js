@@ -26,6 +26,21 @@ export const convertSpeedToPace = (main, decimal) => {
     .padStart(2, '0')}`;
 };
 
+export const getPaceValuesFromSpeed = (main, decimal) => {
+  const speed = Number(main) + Math.min(Number(decimal) * 0.01, 1);
+  if (!speed) return '--';
+  const pace = 60 / speed;
+  return [Math.floor(pace), Math.round((pace % 1) * 60)];
+};
+
+export const getSpeedValuesFromPace = (minutes, seconds) => {
+  const speed = convertPaceToSpeed(minutes, seconds);
+  const multiplierForRounding = Math.pow(10, 1);
+  const rounded =
+    Math.round(speed * multiplierForRounding) / multiplierForRounding;
+  return [Math.floor(speed), rounded % 1];
+};
+
 export const handleTimeInput = (input, updateInput) => {
   if (!input) {
     updateInput('');
