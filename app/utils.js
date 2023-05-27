@@ -17,8 +17,11 @@ export const convertPaceToSpeedString = (minutes, seconds) => {
   return (3600 / totalSeconds).toFixed(2);
 };
 
+const getSpeed = (main, decimal) =>
+  Number(main) + Math.min(Number(decimal) * 0.1, 1);
+
 export const convertSpeedToPace = (main, decimal) => {
-  const speed = Number(main) + Math.min(Number(decimal) * 0.01, 1);
+  const speed = getSpeed(main, decimal);
   if (!speed) return '--';
   const pace = 60 / speed;
   return `${Math.floor(pace)} : ${((pace % 1) * 60)
@@ -27,7 +30,7 @@ export const convertSpeedToPace = (main, decimal) => {
 };
 
 export const getPaceValuesFromSpeed = (main, decimal) => {
-  const speed = Number(main) + Math.min(Number(decimal) * 0.01, 1);
+  const speed = getSpeed(main, decimal);
   if (!speed) return '--';
   const pace = 60 / speed;
   return [Math.floor(pace), Math.round((pace % 1) * 60)];

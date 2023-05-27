@@ -7,18 +7,28 @@ export default function TimeTableRow(props) {
   const { speed, distance } = props;
   return (
     <View style={styles.container}>
-      <Text> {speed?.toFixed(2)} mph </Text>
-      <Text> {convertSpeedToPace(speed, 0)} min/mile </Text>
-      <Text> {hoursToFormattedTime(distance / speed)}</Text>
+      <Text textStyle={styles.textStyle}> {speed?.toFixed(2)} mph </Text>
+      <Text textStyle={styles.textStyle}>
+        {convertSpeedToPace(speed, 0)} min/mile{' '}
+      </Text>
+      <Text textStyle={styles.textStyle}>
+        {hoursToFormattedTime(distance / speed)}
+      </Text>
     </View>
   );
 }
 
 export const TimeTableHeader = () => (
   <View style={styles.container}>
-    <Text size={28}> Speed </Text>
-    <Text size={28}> Pace </Text>
-    <Text size={28}> Finish Time</Text>
+    <Text style={styles.textContainer} textStyle={styles.textStyle} size={24}>
+      Speed
+    </Text>
+    <Text style={styles.textContainer} textStyle={styles.textStyle} size={24}>
+      Pace
+    </Text>
+    <Text style={styles.textContainer} textStyle={styles.textStyle} size={24}>
+      Finish Time
+    </Text>
   </View>
 );
 
@@ -30,5 +40,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  textContainer: {
+    width: '100%',
+  },
+  textStyle: {
+    textAlign: 'center',
   },
 });

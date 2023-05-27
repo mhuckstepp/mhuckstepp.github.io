@@ -17,15 +17,15 @@ import {
 } from './utils';
 
 const raceDistances = [
-  [1, '1 Mile'],
-  [2, '2 Mile'],
-  [3.10686, '5K'],
-  [5, '5 Mile'],
-  [6.21371, '10K'],
-  [10, '10 Miler'],
-  [13.1094, 'Half marathon'],
-  [20, '20 Mile'],
-  [26.2188, ' Marathon'],
+  { value: 1, label: '1 Mile' },
+  { value: 2, label: '2 Mile' },
+  { value: 3.10686, label: '5K' },
+  { value: 5, label: '5 Mile' },
+  { value: 6.21371, label: '10K' },
+  { value: 10, label: '10 Miler' },
+  { value: 13.1094, label: 'Half marathon' },
+  { value: 20, label: '20 Mile' },
+  { value: 26.2188, label: ' Marathon' },
 ];
 
 export default function App() {
@@ -48,15 +48,15 @@ export default function App() {
     setSecond(newSec);
   }, [mainSpeed, decimalSpeed]);
 
-  // useEffect(() => {
-  //   if (switchValue) return;
-  //   const [newMainSpeed, newDecimalSpeed] = getSpeedValuesFromPace(
-  //     minute,
-  //     second,
-  //   );
-  //   setMainSpeed(newMainSpeed);
-  //   setDecimalSpeed(newDecimalSpeed);
-  // }, [minute, second]);
+  useEffect(() => {
+    if (switchValue) return;
+    const [newMainSpeed, newDecimalSpeed] = getSpeedValuesFromPace(
+      minute,
+      second,
+    );
+    setMainSpeed(newMainSpeed);
+    setDecimalSpeed(Math.round(newDecimalSpeed * 10));
+  }, [minute, second]);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -88,11 +88,7 @@ export default function App() {
           <>
             <Text>
               Race:
-              {
-                raceDistances.find(
-                  (distanceObj) => distanceObj[0] == distance,
-                )?.[1]
-              }
+              {distance?.label}
             </Text>
             <Button onPress={() => setDistance(null)} title="clear distance" />
             <FlatList
@@ -100,7 +96,7 @@ export default function App() {
               style={styles.speedListContainer}
               ListHeaderComponent={<TimeTableHeader />}
               renderItem={({ item }) => (
-                <TimeTableRow speed={item} distance={distance} />
+                <TimeTableRow speed={item} distance={distance?.value} />
               )}
               keyExtractor={(item) => item}
             />
@@ -112,11 +108,12 @@ export default function App() {
               the following distances
             </Text>
             <View style={styles.raceButtonContainer}>
-              {raceDistances.map(([distance, label]) => (
+              {raceDistances.map((distanceObj) => (
                 <Button
                   style={styles.raceButton}
-                  title={label}
-                  onPress={() => setDistance(distance)}
+                  title={distanceObj.label}
+                  onPress={() => setDistance(distanceObj)}
+                  key={distanceObj.value}
                 />
               ))}
             </View>
@@ -140,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     width: '100%',
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
   },
   raceButtonContainer: {
     flexDirection: 'row',
