@@ -43,6 +43,16 @@ export default function App() {
         <Switch value={switchValue} onValueChange={setSwitchValue} />
         {switchValue ? (
           <>
+            <Text size={28}>Pace to Speed Converter</Text>
+            <CombinedPickers
+              mainVal={minute}
+              secondaryVal={second}
+              onChangeMain={onChangeMinute}
+              onChangeSecondary={onChangeSecond}
+            />
+          </>
+        ) : (
+          <>
             <Text size={28}>Speed to Pace Converter</Text>
             <CombinedPickers
               mainVal={main}
@@ -50,16 +60,6 @@ export default function App() {
               onChangeMain={onChangeSpeed}
               onChangeSecondary={onChangeSpeedDecimal}
               usePace
-            />
-          </>
-        ) : (
-          <>
-            <Text size={28}>Pace to Speed Converter</Text>
-            <CombinedPickers
-              mainVal={minute}
-              secondaryVal={second}
-              onChangeMain={onChangeMinute}
-              onChangeSecondary={onChangeSecond}
             />
           </>
         )}
