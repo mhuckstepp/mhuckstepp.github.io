@@ -1,40 +1,40 @@
-import { StyleSheet, TextInput, View, Text} from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { Picker, Text } from '.';
 import { handleSpeedInput, convertSpeedToPace } from '../utils';
 
+const SPEED_OPTIONS = [...Array(16).keys()];
+const SPEED_DECIMAL_OPTIONS = [...Array(10).keys()];
 
 export default function SpeedToPace(props) {
- const { main, decimal, onChangeSpeed, onChangeSpeedDecimal } = props;
+  const { main, decimal, onChangeSpeed, onChangeSpeedDecimal } = props;
 
   return (
     <>
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        onChangeText={(value) => handleSpeedInput(value, onChangeSpeed)}
-        value={main}
-        placeholder="mph"
-        keyboardType="numeric"
-      />
-      <Text>.</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={(value) => handleSpeedInput(value, onChangeSpeedDecimal)}
-        value={decimal}
-        placeholder="mph"
-        keyboardType="numeric"
-      />
+      <View style={styles.container}>
+        <Picker
+          onChange={(value) => handleSpeedInput(value, onChangeSpeed)}
+          value={main}
+          options={SPEED_OPTIONS}
+        />
+        <Text>.</Text>
+        <Picker
+          onChange={(value) => handleSpeedInput(value, onChangeSpeedDecimal)}
+          value={decimal}
+          options={SPEED_DECIMAL_OPTIONS}
+        />
       </View>
       <Text> {convertSpeedToPace(main, decimal)} minutes per mile </Text>
-      </>
+    </>
   );
-};
+}
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'flex-end'
-    },
-    input: {
+  container: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  input: {
     height: 40,
     width: 100,
     marginTop: 12,
