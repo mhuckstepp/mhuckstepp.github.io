@@ -8,25 +8,15 @@ import {
   TimeTableHeader,
   Button,
   Text,
+  RaceButtonContainer,
 } from './components';
-// import Footer from './components/footer';
+import Footer from './components/footer';
 import {
   createSpeeds,
   getPaceValuesFromSpeed,
   getSpeedValuesFromPace,
+  RACE_DISTANCES,
 } from './utils';
-
-const raceDistances = [
-  { value: 1, label: '1 Mile' },
-  { value: 2, label: '2 Mile' },
-  { value: 3.10686, label: '5K' },
-  { value: 5, label: '5 Mile' },
-  { value: 6.21371, label: '10K' },
-  { value: 10, label: '10 Miler' },
-  { value: 13.1094, label: 'Half marathon' },
-  { value: 20, label: '20 Mile' },
-  { value: 26.2188, label: ' Marathon' },
-];
 
 export default function App() {
   const [switchValue, setSwitchValue] = useState(false);
@@ -107,20 +97,11 @@ export default function App() {
               Check your total race time based on your current speed for one of
               the following distances
             </Text>
-            <View style={styles.raceButtonContainer}>
-              {raceDistances.map((distanceObj) => (
-                <Button
-                  style={styles.raceButton}
-                  title={distanceObj.label}
-                  onPress={() => setDistance(distanceObj)}
-                  key={distanceObj.value}
-                />
-              ))}
-            </View>
+            <RaceButtonContainer setDistance={setDistance} />
           </>
         )}
       </View>
-      {/* <Footer /> */}
+      <Footer />
     </SafeAreaView>
   );
 }

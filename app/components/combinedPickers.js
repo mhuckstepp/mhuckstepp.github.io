@@ -12,7 +12,7 @@ import {
 const convertToValAndLabel = (value) => ({ value, label: String(value) });
 
 const MINUTE_OPTIONS = [...Array(16).keys()].slice(3).map(convertToValAndLabel);
-const SECOND_OPTIONS = [...Array(60).keys()].map(convertToValAndLabel);
+const SECOND_OPTIONS = [...Array(12).keys()].map(convertToValAndLabel);
 
 const SPEED_OPTIONS = [...Array(16).keys()].map(convertToValAndLabel);
 const SPEED_DECIMAL_OPTIONS = [...Array(10).keys()].map(convertToValAndLabel);

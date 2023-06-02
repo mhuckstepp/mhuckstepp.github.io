@@ -1,5 +1,7 @@
 import { Link } from 'expo-router';
-import { Button, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+
+import Button from './button';
 
 export default function Footer() {
   return (
@@ -7,7 +9,7 @@ export default function Footer() {
       <Link href="/" asChild>
         <Button title="Home" />
       </Link>
-      <Link href="/timePredictor" asChild>
+      <Link href="/predictor" asChild>
         <Button title="Time Predictor" />
       </Link>
     </View>
