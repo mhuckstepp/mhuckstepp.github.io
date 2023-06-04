@@ -15,7 +15,7 @@ import {
   createSpeeds,
   getPaceValuesFromSpeed,
   getSpeedValuesFromPace,
-  RACE_DISTANCES,
+  roundToClosestValidOption,
 } from './utils';
 
 export default function App() {
@@ -35,7 +35,7 @@ export default function App() {
     if (!switchValue) return;
     const [newMin, newSec] = getPaceValuesFromSpeed(mainSpeed, decimalSpeed);
     setMinute(newMin);
-    setSecond(newSec);
+    setSecond(roundToClosestValidOption(newSec));
   }, [mainSpeed, decimalSpeed]);
 
   useEffect(() => {

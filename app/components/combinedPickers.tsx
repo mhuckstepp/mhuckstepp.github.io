@@ -6,16 +6,11 @@ import {
   handleTimeInput,
   convertPaceToSpeedString,
   convertSpeedToPace,
+  MINUTE_OPTIONS,
+  SECOND_OPTIONS,
+  SPEED_OPTIONS,
+  SPEED_DECIMAL_OPTIONS,
 } from '../utils';
-
-// This needs to be done outside the Picker because of a double rendering bug
-const convertToValAndLabel = (value) => ({ value, label: String(value) });
-
-const MINUTE_OPTIONS = [...Array(16).keys()].slice(3).map(convertToValAndLabel);
-const SECOND_OPTIONS = [...Array(12).keys()].map(convertToValAndLabel);
-
-const SPEED_OPTIONS = [...Array(16).keys()].map(convertToValAndLabel);
-const SPEED_DECIMAL_OPTIONS = [...Array(10).keys()].map(convertToValAndLabel);
 
 export default function CombinedPickers(props) {
   const { usePace, mainVal, secondaryVal, onChangeMain, onChangeSecondary } =
@@ -36,7 +31,9 @@ export default function CombinedPickers(props) {
             <Picker
               options={SECOND_OPTIONS}
               value={secondaryVal}
-              onChange={(value) => handleTimeInput(value, onChangeSecondary)}
+              onChange={(value: string) =>
+                handleTimeInput(value, onChangeSecondary)
+              }
               name="seconds"
             />
           </>

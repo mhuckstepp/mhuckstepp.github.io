@@ -6,27 +6,23 @@ import {
   RaceButtonContainer,
   Text,
   PredictTableRow,
+  PredictTableHeader,
 } from './components';
-import {
-  RACE_DISTANCES,
-  predictAndFormatTime,
-  convertToSeconds,
-} from './utils';
+import { RACE_DISTANCES, convertToSeconds } from './utils';
 
 export default function Predictor() {
-  const [distance, setDistance] = useState(RACE_DISTANCES[0].value);
-  const [hour, setHour] = useState(0);
-  const [minute, setMinute] = useState(7);
-  const [second, setSecond] = useState(0);
+  const [knownDistance, setKnownDistance] = useState('1');
+  const [hour, setHour] = useState('0');
+  const [minute, setMinute] = useState('7');
+  const [second, setSecond] = useState('0');
   return (
     <>
       <View style={styles.container}>
         <Text> Distance for known race </Text>
         <TextInput
           style={styles.input}
-          onChangeText={setDistance}
-          value={distance}
-          set
+          onChangeText={setKnownDistance}
+          value={knownDistance}
         />
         <Text> Time for known race </Text>
         <View style={styles.timeRow}>
@@ -44,20 +40,18 @@ export default function Predictor() {
             onChangeText={setSecond}
           />
         </View>
-        <RaceButtonContainer useValue setDistance={setDistance} />;
+        <RaceButtonContainer useValue setDistance={setKnownDistance} />;
         <FlatList
           data={RACE_DISTANCES}
+          ListHeaderComponent={PredictTableHeader}
           renderItem={({ item }) => (
             <PredictTableRow
-              time={predictAndFormatTime(
-                convertToSeconds(hour, minute, second),
-                distance,
-                item.value,
-              )}
-              distance={item}
+              time={convertToSeconds(hour, minute, second)}
+              distanceToPredict={item}
+              knownDistance={Number(knownDistance)}
             />
           )}
-          keyExtractor={(item) => item.value}
+          keyExtractor={(item) => item.label}
         />
       </View>
       <Footer />

@@ -1,17 +1,28 @@
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
 import Text from './text';
-import { convertSpeedToPace } from '../utils';
+import { convertSpeedToPace, formatSeconds, predictTime } from '../utils';
 
 export default function PredictTableRow(props) {
-  const { time, distance } = props;
+  const { time, knownDistance, distanceToPredict } = props;
+  const predictedTime = predictTime(
+    time,
+    knownDistance,
+    distanceToPredict.value,
+  );
+
   return (
     <View style={styles.container}>
-      <Text textStyle={styles.textStyle}>{distance.label}</Text>
-      {/* <Text textStyle={styles.textStyle}>
-        {convertSpeedToPace((distance / time) * 3600, 0)} min/mile Pace
-      </Text> */}
-      <Text textStyle={styles.textStyle}>{time}</Text>
+      <Text textStyle={styles.textStyle}>{distanceToPredict.label}</Text>
+      <Text textStyle={styles.textStyle}>
+        {convertSpeedToPace(
+          (distanceToPredict.value / predictedTime) * 3600,
+          0,
+        )}
+        min/mile Pace
+      </Text>
+      <Text textStyle={styles.textStyle}>{formatSeconds(predictedTime)}</Text>
     </View>
   );
 }
@@ -29,6 +40,12 @@ export const PredictTableHeader = () => (
     </Text>
   </View>
 );
+
+PredictTableRow.propTypes = {
+  time: PropTypes.number,
+  knownDistance: PropTypes.number,
+  distanceToPredict: PropTypes.object,
+};
 
 const styles = StyleSheet.create({
   container: {
