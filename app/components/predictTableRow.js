@@ -1,23 +1,17 @@
 import { View, StyleSheet } from 'react-native';
 
 import Text from './text';
-import { convertSpeedToPace, hoursToFormattedTime } from '../utils';
+import { convertSpeedToPace } from '../utils';
 
 export default function PredictTableRow(props) {
   const { time, distance } = props;
-  console.log({ time, distance });
   return (
     <View style={styles.container}>
-      <Text textStyle={styles.textStyle}>
-        {distance.label} {distance.value} miles
-      </Text>
-      <Text textStyle={styles.textStyle}>
-        {/* {convertSpeedToPace(speed, 0)} min/mile{' '} */}
-        Pace
-      </Text>
-      <Text textStyle={styles.textStyle}>
-        {hoursToFormattedTime(time / 3600)}
-      </Text>
+      <Text textStyle={styles.textStyle}>{distance.label}</Text>
+      {/* <Text textStyle={styles.textStyle}>
+        {convertSpeedToPace((distance / time) * 3600, 0)} min/mile Pace
+      </Text> */}
+      <Text textStyle={styles.textStyle}>{time}</Text>
     </View>
   );
 }

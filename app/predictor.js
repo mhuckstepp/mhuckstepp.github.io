@@ -7,7 +7,11 @@ import {
   Text,
   PredictTableRow,
 } from './components';
-import { RACE_DISTANCES } from './utils';
+import {
+  RACE_DISTANCES,
+  predictAndFormatTime,
+  convertToSeconds,
+} from './utils';
 
 export default function Predictor() {
   const [distance, setDistance] = useState(RACE_DISTANCES[0].value);
@@ -17,19 +21,41 @@ export default function Predictor() {
   return (
     <>
       <View style={styles.container}>
-        <Text> Existing Distance </Text>
-        <TextInput onChangeText={setDistance} value={distance} set />
-        <Text> Existing Time </Text>
+        <Text> Distance for known race </Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setDistance}
+          value={distance}
+          set
+        />
+        <Text> Time for known race </Text>
         <View style={styles.timeRow}>
-          <TextInput value={hour} onChangeText={setHour} />
-          <TextInput value={minute} onChangeText={setMinute} />
-          <TextInput value={second} onChangeText={setSecond} />
+          <TextInput style={styles.input} value={hour} onChangeText={setHour} />
+          <Text>:</Text>
+          <TextInput
+            style={styles.input}
+            value={minute}
+            onChangeText={setMinute}
+          />
+          <Text>:</Text>
+          <TextInput
+            style={styles.input}
+            value={second}
+            onChangeText={setSecond}
+          />
         </View>
         <RaceButtonContainer useValue setDistance={setDistance} />;
         <FlatList
           data={RACE_DISTANCES}
           renderItem={({ item }) => (
-            <PredictTableRow time={minute * 60} distance={item} />
+            <PredictTableRow
+              time={predictAndFormatTime(
+                convertToSeconds(hour, minute, second),
+                distance,
+                item.value,
+              )}
+              distance={item}
+            />
           )}
           keyExtractor={(item) => item.value}
         />
@@ -47,5 +73,17 @@ const styles = StyleSheet.create({
   },
   timeRow: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: {
+    marginBottom: 12,
+    borderRadius: 2,
+    borderColor: 'gray',
+    borderWidth: 1,
+    textAlign: 'center',
+    marginHorizontal: 4,
+    width: 80,
+    height: 20,
   },
 });

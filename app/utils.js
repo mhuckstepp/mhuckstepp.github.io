@@ -33,7 +33,9 @@ const getSpeed = (main, decimal) =>
   Number(main) + Math.min(Number(decimal) * 0.1, 1);
 
 export const convertSpeedToPace = (main, decimal) => {
+  console.log({ main, decimal });
   const speed = getSpeed(main, decimal);
+  console.log({ speed: speed });
   if (!speed) return '--';
   const pace = 60 / speed;
   return `${Math.floor(pace)} : ${((pace % 1) * 60)
@@ -96,4 +98,31 @@ export const createSpeeds = (minutes = 7, seconds = 0) => {
   const speedList = [...Array(TOTAL_ROWS)];
   const startingSpeed = speed - (TOTAL_ROWS * SPEED_INCREMENT) / 2;
   return speedList.map((_, index) => index * SPEED_INCREMENT + startingSpeed);
+};
+
+export const convertToSeconds = (hours = 0, minutes = 0, seconds = 0) => {
+  console.log(
+    { hours, minutes, seconds },
+    hours * 3600 + minutes * 60 + seconds,
+  );
+  return hours * 3600 + minutes * 60 + Number(seconds);
+};
+
+const predictTime = (time1, distance1, distance2) => {
+  if (!time1 || !distance1 || !distance2) return 0;
+  console.log(
+    { time1, distance1, distance2 },
+    time1 * (distance2 / distance1) ** 1.06,
+  );
+  return time1 * (distance2 / distance1) ** 1.06;
+};
+
+const formatSeconds = (timeInSeconds) => {
+  return new Date(timeInSeconds * 1000).toISOString().slice(11, 19);
+};
+
+export const predictAndFormatTime = (time1, distance1, distance2) => {
+  const seconds = predictTime(time1, distance1, distance2);
+  console.log(formatSeconds(seconds), { seconds });
+  return formatSeconds(seconds);
 };

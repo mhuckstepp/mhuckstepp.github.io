@@ -1,17 +1,11 @@
 import { Link } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
 
-import Button from './button';
-
 export default function Footer() {
   return (
     <View style={styles.container}>
-      <Link href="/" asChild>
-        <Button title="Home" />
-      </Link>
-      <Link href="/predictor" asChild>
-        <Button title="Time Predictor" />
-      </Link>
+      <Link href="/">Calculator</Link>
+      <Link href="/predictor">Predictor</Link>
     </View>
   );
 }
