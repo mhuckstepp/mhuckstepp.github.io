@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     marginHorizontal: 6,
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#FFF2CC',
     textAlign: 'center',
   },
   pickerItem: {

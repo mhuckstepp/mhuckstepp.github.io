@@ -2,13 +2,13 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const DEFAULT_SIZE = 16;
 
-export default function RecoverText(props) {
+export default function RunText(props) {
   const { size, children, style, textStyle } = props;
   return (
     <View style={StyleSheet.flatten([styles.container, style])}>
       <Text
         style={StyleSheet.flatten([
-          { fontSize: size || DEFAULT_SIZE },
+          { fontSize: size || DEFAULT_SIZE, textAlign: 'center' },
           textStyle,
         ])}
       >

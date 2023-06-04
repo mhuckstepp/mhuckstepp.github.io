@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, StyleSheet, TextInput, FlatList } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 import {
   Footer,
@@ -7,77 +7,71 @@ import {
   Text,
   PredictTableRow,
   PredictTableHeader,
+  Screen,
+  TextInput,
 } from './components';
 import { RACE_DISTANCES, convertToSeconds } from './utils';
 
 export default function Predictor() {
   const [knownDistance, setKnownDistance] = useState('1');
-  const [hour, setHour] = useState('0');
-  const [minute, setMinute] = useState('7');
-  const [second, setSecond] = useState('0');
+  const [hour, setHour] = useState('00');
+  const [minute, setMinute] = useState('07');
+  const [second, setSecond] = useState('00');
   return (
-    <>
-      <View style={styles.container}>
-        <Text> Distance for known race </Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setKnownDistance}
-          value={knownDistance}
-        />
-        <Text> Time for known race </Text>
+    <Screen>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <Text> Distance for known race (miles) </Text>
+        <TextInput onChange={setKnownDistance} value={knownDistance} />
+        <Text> Time for known race (HH:MM:SS) </Text>
         <View style={styles.timeRow}>
-          <TextInput style={styles.input} value={hour} onChangeText={setHour} />
+          <TextInput value={hour} onChange={setHour} />
           <Text>:</Text>
-          <TextInput
-            style={styles.input}
-            value={minute}
-            onChangeText={setMinute}
-          />
+          <TextInput value={minute} onChange={setMinute} />
           <Text>:</Text>
-          <TextInput
-            style={styles.input}
-            value={second}
-            onChangeText={setSecond}
-          />
+          <TextInput value={second} onChange={setSecond} />
         </View>
-        <RaceButtonContainer useValue setDistance={setKnownDistance} />;
-        <FlatList
-          data={RACE_DISTANCES}
-          ListHeaderComponent={PredictTableHeader}
-          renderItem={({ item }) => (
+        <RaceButtonContainer
+          useValue
+          setDistance={(value) => setKnownDistance(String(value))}
+        />
+        <View style={styles.listView}>
+          <PredictTableHeader />
+          {RACE_DISTANCES.map((distance) => (
             <PredictTableRow
               time={convertToSeconds(hour, minute, second)}
-              distanceToPredict={item}
+              distanceToPredict={distance}
               knownDistance={Number(knownDistance)}
+              key={distance.label}
             />
-          )}
-          keyExtractor={(item) => item.label}
-        />
-      </View>
+          ))}
+        </View>
+      </ScrollView>
       <Footer />
-    </>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
+    width: '100%',
+    maxWidth: 600,
+    marginBottom: 12,
+  },
+  scrollContainer: {
+    alignItems: 'center',
+  },
+  listView: {
+    width: '100%',
     alignItems: 'center',
   },
   timeRow: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  input: {
     marginBottom: 12,
-    borderRadius: 2,
-    borderColor: 'gray',
-    borderWidth: 1,
-    textAlign: 'center',
-    marginHorizontal: 4,
-    width: 80,
-    height: 20,
   },
 });

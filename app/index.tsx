@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Switch, StyleSheet, FlatList } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView, Switch, StyleSheet, View } from 'react-native';
 
 import {
   CombinedPickers,
@@ -9,9 +8,11 @@ import {
   Button,
   Text,
   RaceButtonContainer,
+  Screen,
 } from './components';
 import Footer from './components/footer';
 import {
+  CHECK_TEXT,
   createSpeeds,
   getPaceValuesFromSpeed,
   getSpeedValuesFromPace,
@@ -49,8 +50,11 @@ export default function App() {
   }, [minute, second]);
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
-      <View style={styles.bodyContainer}>
+    <Screen>
+      <ScrollView
+        style={styles.bodyContainer}
+        contentContainerStyle={styles.scrollViewContent}
+      >
         <Switch value={switchValue} onValueChange={setSwitchValue} />
         {switchValue ? (
           <>
@@ -77,48 +81,44 @@ export default function App() {
         {distance ? (
           <>
             <Text>
-              Race:
+              {'Run: '}
               {distance?.label}
             </Text>
             <Button onPress={() => setDistance(null)} title="clear distance" />
-            <FlatList
-              data={speedList}
-              style={styles.speedListContainer}
-              ListHeaderComponent={<TimeTableHeader />}
-              renderItem={({ item }) => (
-                <TimeTableRow speed={item} distance={distance?.value} />
-              )}
-              keyExtractor={(item) => item}
-            />
+            <View style={styles.speedListContainer}>
+              <TimeTableHeader />
+              {speedList.map((speed) => (
+                <TimeTableRow
+                  key={speed}
+                  speed={speed}
+                  distance={distance?.value}
+                />
+              ))}
+            </View>
           </>
         ) : (
           <>
-            <Text size={18}>
-              Check your total race time based on your current speed for one of
-              the following distances
+            <Text style={styles.textStyle} size={16}>
+              {CHECK_TEXT}
             </Text>
             <RaceButtonContainer setDistance={setDistance} />
           </>
         )}
-      </View>
+      </ScrollView>
       <Footer />
-    </SafeAreaView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingTop: 16,
-  },
   bodyContainer: {
-    justifyContent: 'flex-start',
     flex: 1,
-    alignItems: 'center',
     width: '100%',
-    paddingHorizontal: 8,
+    marginHorizontal: 8,
+    marginBottom: 12,
+  },
+  scrollViewContent: {
+    alignItems: 'center',
   },
   raceButtonContainer: {
     flexDirection: 'row',
@@ -135,5 +135,10 @@ const styles = StyleSheet.create({
   speedListContainer: {
     width: '100%',
     maxWidth: 500,
+  },
+  textStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

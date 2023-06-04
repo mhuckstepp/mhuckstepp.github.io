@@ -1,18 +1,26 @@
-import { Button, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
-export default function RecoverButton(props) {
+import Text from './text';
+
+export default function RunButton(props) {
   const { title, style, onPress } = props;
   return (
-    <View style={StyleSheet.flatten([styles.container, style])}>
-      <Button title={title} onPress={onPress} />
-    </View>
+    <Pressable
+      style={StyleSheet.flatten([styles.container, style])}
+      onPress={onPress}
+    >
+      <Text> {title} </Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 10,
+    borderRadius: 4,
     margin: 5,
     height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#8E7CC3',
   },
 });

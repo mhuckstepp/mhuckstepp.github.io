@@ -9,3 +9,5 @@ export { default as Footer } from './footer';
 export { default as Button } from './button';
 export { default as Picker } from './picker';
 export { default as Text } from './text';
+export { default as Screen } from './screen';
+export { default as TextInput } from './textInput';

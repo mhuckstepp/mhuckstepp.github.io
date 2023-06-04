@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import Button from './button';
 import { RACE_DISTANCES } from '../utils';
@@ -6,7 +6,7 @@ import { RACE_DISTANCES } from '../utils';
 export default function RaceButtonContainer(props) {
   const { useValue, setDistance } = props;
   return (
-    <ScrollView contentContainerStyle={styles.raceButtonContainer}>
+    <View style={styles.raceButtonContainer}>
       {RACE_DISTANCES.map((distanceObj) => (
         <Button
           style={styles.raceButton}
@@ -17,7 +17,7 @@ export default function RaceButtonContainer(props) {
           key={distanceObj.value}
         />
       ))}
-    </ScrollView>
+    </View>
   );
 }
 

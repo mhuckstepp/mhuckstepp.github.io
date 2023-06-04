@@ -7,11 +7,11 @@ export default function TimeTableRow(props) {
   const { speed, distance } = props;
   return (
     <View style={styles.container}>
-      <Text textStyle={styles.textStyle}> {speed?.toFixed(2)} mph </Text>
-      <Text textStyle={styles.textStyle}>
+      <Text style={styles.textStyle}> {speed?.toFixed(2)} mph </Text>
+      <Text style={styles.textStyle}>
         {convertSpeedToPace(speed, 0)} min/mile{' '}
       </Text>
-      <Text textStyle={styles.textStyle}>
+      <Text style={styles.textStyle}>
         {hoursToFormattedTime(distance / speed)}
       </Text>
     </View>
@@ -20,13 +20,13 @@ export default function TimeTableRow(props) {
 
 export const TimeTableHeader = () => (
   <View style={styles.container}>
-    <Text style={styles.textContainer} size={22}>
+    <Text style={styles.textStyle} size={22}>
       Speed
     </Text>
-    <Text style={styles.textContainer} size={22}>
+    <Text style={styles.textStyle} size={22}>
       Pace
     </Text>
-    <Text style={styles.textContainer} size={22}>
+    <Text style={styles.textStyle} size={22}>
       Finish Time
     </Text>
   </View>
@@ -36,17 +36,16 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingHorizontal: 16,
-    paddingVertical: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  textContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flex: 1,
-  },
   textStyle: {
-    textAlign: 'center',
+    flex: 1,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderColor: 'lightgrey',
+    borderWidth: 1,
   },
 });

@@ -14,28 +14,28 @@ export default function PredictTableRow(props) {
 
   return (
     <View style={styles.container}>
-      <Text textStyle={styles.textStyle}>{distanceToPredict.label}</Text>
-      <Text textStyle={styles.textStyle}>
+      <Text style={styles.textStyle}>{distanceToPredict.label}</Text>
+      <Text style={styles.textStyle}>
         {convertSpeedToPace(
           (distanceToPredict.value / predictedTime) * 3600,
           0,
         )}
-        min/mile Pace
+        {' min/mile'}
       </Text>
-      <Text textStyle={styles.textStyle}>{formatSeconds(predictedTime)}</Text>
+      <Text style={styles.textStyle}>{formatSeconds(predictedTime)}</Text>
     </View>
   );
 }
 
 export const PredictTableHeader = () => (
   <View style={styles.container}>
-    <Text style={styles.textContainer} size={22}>
-      Speed
+    <Text style={styles.textStyle} size={22}>
+      Distance
     </Text>
-    <Text style={styles.textContainer} size={22}>
+    <Text style={styles.textStyle} size={22}>
       Pace
     </Text>
-    <Text style={styles.textContainer} size={22}>
+    <Text style={styles.textStyle} size={22}>
       Finish Time
     </Text>
   </View>
@@ -49,19 +49,18 @@ PredictTableRow.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
     paddingHorizontal: 16,
-    paddingVertical: 8,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flex: 1,
+    alignSelf: 'stretch',
   },
   textStyle: {
-    textAlign: 'center',
+    flex: 1,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderColor: 'lightgrey',
+    borderWidth: 1,
   },
 });
