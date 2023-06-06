@@ -1,6 +1,8 @@
 import { Picker } from '@react-native-picker/picker';
 import { StyleSheet } from 'react-native';
 
+import { COLORS } from '../styles';
+
 const PICKER_HEIGHT = 45;
 
 export default function RunCalcPicker(props) {
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     marginHorizontal: 6,
-    backgroundColor: '#FFF2CC',
+    backgroundColor: COLORS.lightYellow,
     textAlign: 'center',
   },
   pickerItem: {

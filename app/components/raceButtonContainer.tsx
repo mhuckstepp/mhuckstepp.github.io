@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 
 import Button from './button';
-import { RACE_DISTANCES } from '../utils';
+import { RACE_DISTANCES } from '../constants';
 
 export default function RaceButtonContainer(props) {
   const { useValue, setDistance } = props;

@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet } from 'react-native';
 
 import Text from './text';
+import { COLORS } from '../styles';
 
 export default function RunButton(props) {
   const { title, style, onPress } = props;
@@ -21,6 +22,6 @@ const styles = StyleSheet.create({
     height: 45,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#8E7CC3',
+    backgroundColor: COLORS.lightPurple,
   },
 });

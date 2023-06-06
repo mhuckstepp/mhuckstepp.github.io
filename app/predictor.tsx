@@ -10,7 +10,8 @@ import {
   Screen,
   TextInput,
 } from './components';
-import { RACE_DISTANCES, convertToSeconds } from './utils';
+import { RACE_DISTANCES } from './constants';
+import { convertToSeconds } from './utils';
 
 export default function Predictor() {
   const [knownDistance, setKnownDistance] = useState('1');

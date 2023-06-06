@@ -1,24 +1,4 @@
-const dayjs = require('dayjs');
-const duration = require('dayjs/plugin/duration');
-dayjs.extend(duration);
-
-const TOTAL_ROWS = 18;
-const SPEED_INCREMENT = 0.04;
-
-export const CHECK_TEXT =
-  'Check your total race time based on your current speed for one of the following distances';
-
-export const RACE_DISTANCES = [
-  { value: 1, label: '1 Mile' },
-  { value: 2, label: '2 Mile' },
-  { value: 3.10686, label: '5K' },
-  { value: 5, label: '5 Mile' },
-  { value: 6.21371, label: '10K' },
-  { value: 10, label: '10 Miler' },
-  { value: 13.1094, label: 'Half marathon' },
-  { value: 20, label: '20 Mile' },
-  { value: 26.2188, label: ' Marathon' },
-];
+import { SPEED_INCREMENT, TOTAL_ROWS } from './constants';
 
 // This needs to be done outside the Picker because of a double rendering bug
 const convertToValAndLabelPadStart = (value: number) => ({
@@ -108,7 +88,10 @@ export const handleTimeInput = (input, updateInput) => {
   updateInput(Number(input));
 };
 
-export const handleSpeedInput = (input, updateInput) => {
+export const handleSpeedInput = (
+  input: string,
+  updateInput: (input: string) => void,
+) => {
   if (!input) {
     updateInput('');
     return;
@@ -118,26 +101,15 @@ export const handleSpeedInput = (input, updateInput) => {
   updateInput(input);
 };
 
-export const hoursToFormattedTime = (hours) => {
-  const dateObj = new Date(hours * 60 * 60 * 1000);
-  hours = dateObj.getUTCHours();
-  const minutes = dateObj.getUTCMinutes();
-  const seconds = dateObj.getSeconds();
-
-  return (
-    hours.toString().padStart(2, '0') +
-    ':' +
-    minutes.toString().padStart(2, '0') +
-    ':' +
-    seconds.toString().padStart(2, '0')
-  );
+export const hoursToFormattedTime = (hours: number) => {
+  return new Date(hours * 60 * 60 * 1000).toISOString().slice(11, 19);
 };
 
 export const createSpeeds = (minutes = 7, seconds = 0) => {
   const speed = convertPaceToSpeedInt(minutes, seconds);
   const speedList = [...Array(TOTAL_ROWS)];
-  const startingSpeed = speed - (TOTAL_ROWS * SPEED_INCREMENT) / 2;
-  return speedList.map((_, index) => index * SPEED_INCREMENT + startingSpeed);
+  const startingSpeed = speed + (TOTAL_ROWS * SPEED_INCREMENT) / 2;
+  return speedList.map((_, index) => startingSpeed - index * SPEED_INCREMENT);
 };
 
 export const convertToSeconds = (hours = '0', minutes = '0', seconds = '0') =>

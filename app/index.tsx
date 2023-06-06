@@ -11,8 +11,8 @@ import {
   Screen,
 } from './components';
 import Footer from './components/footer';
+import { CHECK_TEXT } from './constants';
 import {
-  CHECK_TEXT,
   createSpeeds,
   getPaceValuesFromSpeed,
   getSpeedValuesFromPace,
