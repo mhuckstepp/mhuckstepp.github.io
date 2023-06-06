@@ -11,7 +11,6 @@ import {
   Screen,
 } from './components';
 import Footer from './components/footer';
-import { CHECK_TEXT } from './constants';
 import {
   createSpeeds,
   getPaceValuesFromSpeed,
@@ -20,7 +19,7 @@ import {
 } from './utils';
 
 export default function App() {
-  const [switchValue, setSwitchValue] = useState(false);
+  const [useSpeed, setUseSpeed] = useState(false);
   const [minute, setMinute] = useState(7);
   const [second, setSecond] = useState(30);
   const [mainSpeed, setMainSpeed] = useState(7);
@@ -33,14 +32,14 @@ export default function App() {
   }, [minute, second]);
 
   useEffect(() => {
-    if (!switchValue) return;
+    if (!useSpeed) return;
     const [newMin, newSec] = getPaceValuesFromSpeed(mainSpeed, decimalSpeed);
     setMinute(newMin);
     setSecond(roundToClosestValidOption(newSec));
   }, [mainSpeed, decimalSpeed]);
 
   useEffect(() => {
-    if (switchValue) return;
+    if (useSpeed) return;
     const [newMainSpeed, newDecimalSpeed] = getSpeedValuesFromPace(
       minute,
       second,
@@ -55,8 +54,8 @@ export default function App() {
         style={styles.bodyContainer}
         contentContainerStyle={styles.scrollViewContent}
       >
-        <Switch value={switchValue} onValueChange={setSwitchValue} />
-        {switchValue ? (
+        <Switch value={useSpeed} onValueChange={setUseSpeed} />
+        {useSpeed ? (
           <>
             <Text size={28}>Speed to Pace Converter</Text>
             <CombinedPickers
@@ -99,7 +98,9 @@ export default function App() {
         ) : (
           <>
             <Text style={styles.textStyle} size={16}>
-              {CHECK_TEXT}
+              {`Check your total race time based on your current ${
+                useSpeed ? 'speed' : 'pace'
+              } for one of the following distances`}
             </Text>
             <RaceButtonContainer setDistance={setDistance} />
           </>
