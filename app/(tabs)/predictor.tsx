@@ -2,16 +2,15 @@ import { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 
 import {
-  Footer,
   RaceButtonContainer,
   Text,
   PredictTableRow,
   PredictTableHeader,
   Screen,
   TextInput,
-} from './components';
-import { RACE_DISTANCES } from './constants';
-import { convertToSeconds } from './utils';
+} from '../components';
+import { RACE_DISTANCES } from '../constants';
+import { convertToSeconds } from '../utils';
 
 export default function Predictor() {
   const [knownDistance, setKnownDistance] = useState('1');
@@ -19,7 +18,7 @@ export default function Predictor() {
   const [minute, setMinute] = useState('07');
   const [second, setSecond] = useState('00');
   return (
-    <Screen>
+    <Screen title="Predictor">
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.scrollContainer}
@@ -50,7 +49,6 @@ export default function Predictor() {
           ))}
         </View>
       </ScrollView>
-      <Footer />
     </Screen>
   );
 }

@@ -56,7 +56,6 @@ export const convertSpeedToPace = (main: number, decimal: number) => {
   const speed = getSpeed(main, decimal);
   if (!speed) return '--';
   const pace = 60 / speed;
-  console.log((pace % 1) * 60);
   if ((pace % 1) * 60 > 59.1) return `${Math.round(pace)} : 00`;
   return `${Math.floor(pace)} : ${((pace % 1) * 60)
     .toFixed(0)

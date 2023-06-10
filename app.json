@@ -1,10 +1,14 @@
 {
   "expo": {
-    "scheme": "acme",
+    "scheme": "runtimecalc",
     "web": {
       "bundler": "metro"
     },
     "name": "run-time-calc",
-    "slug": "run-time-calc"
+    "slug": "run-time-calc",
+    "splash": {
+      "image": "./assets/splash.png"
+    },
+    "icon": "./assets/icon.png"
   }
 }

@@ -1,3 +1,4 @@
+import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ScrollView, Switch, StyleSheet, View } from 'react-native';
 
@@ -9,14 +10,14 @@ import {
   Text,
   RaceButtonContainer,
   Screen,
-} from './components';
-import Footer from './components/footer';
+  HeaderTitle,
+} from '../components';
 import {
   createSpeeds,
   getPaceValuesFromSpeed,
   getSpeedValuesFromPace,
   roundToClosestValidOption,
-} from './utils';
+} from '../utils';
 
 export default function App() {
   const [useSpeed, setUseSpeed] = useState(false);
@@ -49,7 +50,7 @@ export default function App() {
   }, [minute, second]);
 
   return (
-    <Screen>
+    <Screen title="Calculator">
       <ScrollView
         style={styles.bodyContainer}
         contentContainerStyle={styles.scrollViewContent}
@@ -106,7 +107,6 @@ export default function App() {
           </>
         )}
       </ScrollView>
-      <Footer />
     </Screen>
   );
 }
