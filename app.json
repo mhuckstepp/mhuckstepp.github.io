@@ -4,11 +4,19 @@
     "web": {
       "bundler": "metro"
     },
-    "name": "run-time-calc",
+    "name": "Good Runs Predictor",
     "slug": "run-time-calc",
     "splash": {
       "image": "./assets/splash.png"
     },
-    "icon": "./assets/icon.png"
+    "icon": "./assets/icon.png",
+    "extra": {
+      "eas": {
+        "projectId": "65b9afed-ac45-41ca-938e-7a887fa7223f"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.mhuckster.runtimecalc"
+    }
   }
 }

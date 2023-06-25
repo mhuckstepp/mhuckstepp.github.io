@@ -15,13 +15,15 @@ const convertToValAndLabelPadEnd = (value: number) => ({
 export const MINUTE_OPTIONS = [...Array(16).keys()]
   .slice(3)
   .map(convertToValAndLabelPadStart);
+
 export const SECOND_OPTIONS = [...Array(12).keys()]
   .map((val) => val * 5)
   .map(convertToValAndLabelPadStart);
 
-export const SPEED_OPTIONS = [...Array(16).keys()].map(
+export const SPEED_OPTIONS = [...Array(28).keys()].map(
   convertToValAndLabelPadStart,
 );
+
 export const SPEED_DECIMAL_OPTIONS = [...Array(10).keys()].map(
   convertToValAndLabelPadEnd,
 );
@@ -107,8 +109,8 @@ export const hoursToFormattedTime = (hours: number) => {
 export const createSpeeds = (minutes = 7, seconds = 0) => {
   const speed = convertPaceToSpeedInt(minutes, seconds);
   const speedList = [...Array(TOTAL_ROWS)];
-  const startingSpeed = speed + (TOTAL_ROWS * SPEED_INCREMENT) / 2;
-  return speedList.map((_, index) => startingSpeed - index * SPEED_INCREMENT);
+  const startingSpeed = speed - (TOTAL_ROWS * SPEED_INCREMENT) / 2;
+  return speedList.map((_, index) => startingSpeed + index * SPEED_INCREMENT);
 };
 
 export const convertToSeconds = (hours = '0', minutes = '0', seconds = '0') =>

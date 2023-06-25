@@ -1,4 +1,3 @@
-import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ScrollView, Switch, StyleSheet, View } from 'react-native';
 
@@ -6,11 +5,11 @@ import {
   CombinedPickers,
   TimeTableRow,
   TimeTableHeader,
+  TimeTableFooter,
   Button,
   Text,
   RaceButtonContainer,
   Screen,
-  HeaderTitle,
 } from '../components';
 import {
   createSpeeds,
@@ -94,6 +93,7 @@ export default function App() {
                   distance={distance?.value}
                 />
               ))}
+              {distance ? <TimeTableFooter distance={distance?.value} /> : null}
             </View>
           </>
         ) : (
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
   bodyContainer: {
     flex: 1,
     width: '100%',
-    marginHorizontal: 8,
-    marginBottom: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 12,
   },
   scrollViewContent: {
     alignItems: 'center',
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
   speedListContainer: {
     width: '100%',
     maxWidth: 500,
+    paddingVertical: 12,
   },
   textStyle: {
     flex: 1,

@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Screen(props) {
   const { children, title } = props;
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={['left', 'right']}>
       {title ? (
         <Stack.Screen
           options={{
@@ -26,6 +26,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    paddingTop: 16,
   },
 });
