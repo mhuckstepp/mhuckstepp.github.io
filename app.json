@@ -16,7 +16,8 @@
       }
     },
     "ios": {
-      "bundleIdentifier": "com.mhuckster.runtimecalc"
+      "bundleIdentifier": "com.mhuckster.runtimecalc",
+      "buildNumber": "2"
     }
   }
 }

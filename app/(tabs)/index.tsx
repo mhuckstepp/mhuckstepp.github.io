@@ -1,5 +1,6 @@
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { ScrollView, Switch, StyleSheet, View } from 'react-native';
+import { ScrollView, Switch, StyleSheet, View, Platform } from 'react-native';
 
 import {
   CombinedPickers,
@@ -19,6 +20,8 @@ import {
 } from '../utils';
 
 export default function App() {
+  const router = useRouter();
+  const { support } = useLocalSearchParams();
   const [useSpeed, setUseSpeed] = useState(false);
   const [minute, setMinute] = useState(7);
   const [second, setSecond] = useState(30);
@@ -47,6 +50,10 @@ export default function App() {
     setMainSpeed(newMainSpeed);
     setDecimalSpeed(Math.round(newDecimalSpeed * 10));
   }, [minute, second]);
+
+  if (Platform.OS === 'web' && support) {
+    router.push('support');
+  }
 
   return (
     <Screen title="Calculator">

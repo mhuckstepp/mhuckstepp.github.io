@@ -20,6 +20,13 @@ export default function AppLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="support"
+        options={{
+          // This tab will no longer show up in the tab bar.
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
